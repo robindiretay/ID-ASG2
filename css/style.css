@@ -13,7 +13,6 @@
     box-sizing: border-box;
     outline: none; border:none;
     text-decoration: none;
-    text-transform: capitalize;
     transition: .2s linear;
 }
 
@@ -202,6 +201,14 @@ section{
 .header .cart-items-container .btn{
     width: 100%;
     text-align: center;
+}
+
+.cart-items-container {
+    display: none; /* Hide the container by default */
+}
+
+.cart-items-container.active {
+    display: block; /* Show the container when it has the 'active' class */
 }
 
 .home{
