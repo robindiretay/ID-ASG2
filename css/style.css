@@ -192,6 +192,7 @@ section{
     font-size: 2rem;
     color:var(--black);
     padding-bottom: .5rem;
+    padding-right: 100;
 }
 
 .header .cart-items-container .cart-item .content .price{
@@ -206,10 +207,20 @@ section{
 
 .cart-items-container {
     display: none; /* Hide the container by default */
+    max-height: 300px; /* Set a maximum height for the container */
+    overflow-y: auto; /* Add vertical scrollbar when content overflows */
+    scroll-behavior: smooth;
 }
 
 .cart-items-container.active {
     display: block; /* Show the container when it has the 'active' class */
+}
+
+.cart-items-container .empty-cart-message {
+    color: #727272;
+    text-align: center;
+    font-size: 1.5rem;
+    padding:.5rem 0;
 }
 
 .home{

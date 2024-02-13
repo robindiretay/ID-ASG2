@@ -102,6 +102,15 @@ const cartBtn = document.getElementById('cart-btn');
         // Append the cart item to the container
         // Append before the checkout button
         cartItemsContainer.insertBefore(cartItemDiv, cartItemsContainer.lastElementChild);
+        
+    }
+
+    // Retrieve cart items from localStorage and append them to the cart
+    const savedCartItems = JSON.parse(localStorage.getItem('cartItems'));
+    if (savedCartItems) {
+        savedCartItems.forEach(product => {
+            appendProductToCart(product);
+        });
     }
 
     // Event listener for add to cart buttons
@@ -121,6 +130,16 @@ const cartBtn = document.getElementById('cart-btn');
     function removeFromCart(event) {
         const cartItem = event.target.parentElement;
         cartItem.remove();
+
+        // Update cart items in localStorage
+        const cartItems = Array.from(cartItemsContainer.querySelectorAll('.cart-item')).map(cartItem => {
+            return {
+                name: cartItem.querySelector('h3').textContent,
+                imageSrc: cartItem.querySelector('img').src,
+                price: cartItem.querySelector('.price').textContent
+            };
+        });
+        localStorage.setItem('cartItems', JSON.stringify(cartItems));
     }
 });
 
@@ -168,6 +187,14 @@ document.addEventListener("DOMContentLoaded", function() {
         cartItemsContainer.insertBefore(cartItemDiv, cartItemsContainer.lastElementChild);
     }
 
+    // Retrieve cart items from localStorage and append them to the cart
+    const savedCartItems = JSON.parse(localStorage.getItem('cartItems2'));
+    if (savedCartItems) {
+        savedCartItems.forEach(product => {
+            appendProductToCart(product);
+        });
+    }
+
     // Event listener for add to cart buttons
     const addToCartButtons = document.querySelectorAll('.box .fas.fa-shopping-cart');
     addToCartButtons.forEach(button => {
@@ -179,6 +206,15 @@ document.addEventListener("DOMContentLoaded", function() {
                 price: productBox.querySelector('.content .price').textContent.split(' ')[0] // Extract only the first price
             };
             appendProductToCart(product);
+            // Save cart items to localStorage
+            const cartItems2 = Array.from(cartItemsContainer.querySelectorAll('.cart-item')).map(cartItem => {
+                return {
+                    name: cartItem.querySelector('h3').textContent,
+                    imageSrc: cartItem.querySelector('img').src,
+                    price: cartItem.querySelector('.price').textContent
+                };
+            });
+            localStorage.setItem('cartItems2', JSON.stringify(cartItems2));
         });
     });
 
@@ -186,7 +222,47 @@ document.addEventListener("DOMContentLoaded", function() {
     function removeFromCart(event) {
         const cartItem = event.target.parentElement;
         cartItem.remove();
+
+        // Update cart items in localStorage
+        const cartItems2 = Array.from(cartItemsContainer.querySelectorAll('.cart-item')).map(cartItem => {
+            return {
+                name: cartItem.querySelector('h3').textContent,
+                imageSrc: cartItem.querySelector('img').src,
+                price: cartItem.querySelector('.price').textContent
+            };
+        });
+        localStorage.setItem('cartItems2', JSON.stringify(cartItems2));
     }
 });
 
 
+document.addEventListener("DOMContentLoaded", function() {
+    const heartIcons = document.querySelectorAll('.fas.fa-heart');
+
+    heartIcons.forEach(icon => {
+        // Check localStorage for saved state
+        const productName = icon.parentElement.parentElement.querySelector('.content h3').textContent;
+        const savedColor = localStorage.getItem(productName);
+
+        // Apply saved color or default color
+        if (savedColor === '#d3ad7f') {
+            icon.style.color = savedColor;
+        } else {
+            icon.style.color = '#fff'; // Default color
+        }
+
+        // Add click event listener to each heart icon
+        icon.addEventListener('click', function() {
+            // Toggle color of heart icon
+            if (icon.style.color === 'rgb(211, 173, 127)') {
+                icon.style.color = '#fff'; // Change color to black
+                // Save state to localStorage
+                localStorage.setItem(productName, '#000');
+            } else {
+                icon.style.color = '#d3ad7f'; // Change color to the desired color
+                // Save state to localStorage
+                localStorage.setItem(productName, '#d3ad7f');
+            }
+        });
+    });
+});
