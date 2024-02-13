@@ -65,6 +65,7 @@ section{
     color:#fff;
     background: var(--main-color);
     cursor: pointer;
+    text-transform: capitalize;
 }
 
 .btn:hover{
