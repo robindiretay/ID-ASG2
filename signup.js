@@ -188,9 +188,9 @@ document.addEventListener("DOMContentLoaded", function() {
     }
 
     // Retrieve cart items from localStorage and append them to the cart
-    const savedCartItems = JSON.parse(localStorage.getItem('cartItems2'));
-    if (savedCartItems) {
-        savedCartItems.forEach(product => {
+    const savedCartItems2 = JSON.parse(localStorage.getItem('cartItems2'));
+    if (savedCartItems2) {
+        savedCartItems2.forEach(product => {
             appendProductToCart(product);
         });
     }
@@ -220,8 +220,8 @@ document.addEventListener("DOMContentLoaded", function() {
 
     // Function to remove item from cart
     function removeFromCart(event) {
-        const cartItem = event.target.parentElement;
-        cartItem.remove();
+        const cartItem2 = event.target.parentElement;
+        cartItem2.remove();
 
         // Update cart items in localStorage
         const cartItems2 = Array.from(cartItemsContainer.querySelectorAll('.cart-item')).map(cartItem => {
